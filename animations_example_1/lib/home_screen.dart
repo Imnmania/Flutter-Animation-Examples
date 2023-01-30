@@ -27,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen>
       duration: const Duration(seconds: 2),
     );
     _animation = Tween<double>(begin: 0.0, end: 2 * pi).animate(_controller);
+    _controller.repeat();
     super.initState();
   }
 
@@ -40,26 +41,34 @@ class _HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Transform(
-          alignment: Alignment.center,
-          transform: Matrix4.identity()..rotateZ(0.1),
-          child: Container(
-            height: 100,
-            width: 100,
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: const [
-                BoxShadow(
-                  offset: Offset(0, 3),
-                  blurRadius: 5,
-                  spreadRadius: 3,
-                  color: Colors.black54,
-                )
-              ],
-            ),
-          ),
-        ),
+        child: AnimatedBuilder(
+            animation: _controller,
+            builder: (context, child) {
+              return Transform(
+                ///* to be approx/simple, use alignment
+                alignment: Alignment.center,
+
+                ///* to be more specific use origin
+                // origin: const Offset(50, 50),
+                transform: Matrix4.identity()..rotateY(_animation.value),
+                child: Container(
+                  height: 100,
+                  width: 100,
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: const [
+                      BoxShadow(
+                        offset: Offset(0, 3),
+                        blurRadius: 5,
+                        spreadRadius: 3,
+                        color: Colors.black54,
+                      )
+                    ],
+                  ),
+                ),
+              );
+            }),
       ),
     );
   }
