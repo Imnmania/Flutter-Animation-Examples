@@ -69,7 +69,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             ),
           );
 
-          /// reset the [_flipController] and start the animation
+          /// reset the [_flipController]
+          /// and start the [_flipAnimation] with new values
           _flipController
             ..reset()
             ..forward();
@@ -81,6 +82,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     _flipController.addStatusListener(
       (status) {
         if (status == AnimationStatus.completed) {
+          /// set new values for [_counterClockWiseRotationAnimation]
           _counterClockWiseRotationAnimation = Tween<double>(
             begin: _counterClockWiseRotationAnimation.value,
             end: _counterClockWiseRotationAnimation.value + -(pi / 2),
@@ -91,7 +93,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             ),
           );
 
-          /// reset the [_counterClockWiseRotationAnimation] and start the animation
+          /// reset the [_counterClockWiseRotationAnimationController]
+          /// and start the [_counterClockWiseRotationAnimation] with new values
           _counterClockwiseRotationController
             ..reset()
             ..forward();
