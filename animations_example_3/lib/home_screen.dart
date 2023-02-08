@@ -1,6 +1,7 @@
 import 'dart:math' show pi;
 
 import 'package:flutter/material.dart';
+import 'package:vector_math/vector_math_64.dart' show Vector3;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -87,10 +88,64 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       ..rotateZ(_animation.evaluate(_zController)),
                     child: Stack(
                       children: [
+                        //? back
+                        Transform(
+                          alignment: Alignment.center,
+                          transform: Matrix4.identity()
+                            ..translate(
+                              Vector3(0, 0, -widthAndHeight),
+                            ),
+                          child: Container(
+                            height: widthAndHeight,
+                            width: widthAndHeight,
+                            color: Colors.purple,
+                          ),
+                        ),
+                        //? left side
+                        Transform(
+                          alignment: Alignment.centerLeft,
+                          transform: Matrix4.identity()..rotateY(pi / 2),
+                          child: Container(
+                            height: widthAndHeight,
+                            width: widthAndHeight,
+                            color: Colors.yellow,
+                          ),
+                        ),
+                        //? right side
+                        Transform(
+                          alignment: Alignment.centerRight,
+                          transform: Matrix4.identity()..rotateY(-pi / 2),
+                          child: Container(
+                            height: widthAndHeight,
+                            width: widthAndHeight,
+                            color: Colors.blue,
+                          ),
+                        ),
+                        //? front
                         Container(
                           height: widthAndHeight,
                           width: widthAndHeight,
-                          color: Colors.red,
+                          color: Colors.green,
+                        ),
+                        //? top side
+                        Transform(
+                          alignment: Alignment.topCenter,
+                          transform: Matrix4.identity()..rotateX(-pi / 2),
+                          child: Container(
+                            height: widthAndHeight,
+                            width: widthAndHeight,
+                            color: Colors.orange,
+                          ),
+                        ),
+                        //? bottom side
+                        Transform(
+                          alignment: Alignment.bottomCenter,
+                          transform: Matrix4.identity()..rotateX(pi / 2),
+                          child: Container(
+                            height: widthAndHeight,
+                            width: widthAndHeight,
+                            color: Colors.cyan,
+                          ),
                         ),
                       ],
                     ),
