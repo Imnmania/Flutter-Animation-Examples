@@ -40,6 +40,19 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       begin: 0,
       end: pi * 2,
     );
+
+    _xController
+      ..reset()
+      ..repeat();
+
+    _yController
+      ..reset()
+      ..repeat();
+
+    _zController
+      ..reset()
+      ..repeat();
+
     super.initState();
   }
 
@@ -53,18 +66,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    _xController
-      ..reset()
-      ..repeat();
-
-    _yController
-      ..reset()
-      ..repeat();
-
-    _zController
-      ..reset()
-      ..repeat();
-
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -74,83 +75,84 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               width: double.infinity,
             ),
             AnimatedBuilder(
-                animation: Listenable.merge([
-                  _xController,
-                  _yController,
-                  _zController,
-                ]),
-                builder: (context, child) {
-                  return Transform(
-                    alignment: Alignment.center,
-                    transform: Matrix4.identity()
-                      ..rotateX(_animation.evaluate(_xController))
-                      ..rotateY(_animation.evaluate(_yController))
-                      ..rotateZ(_animation.evaluate(_zController)),
-                    child: Stack(
-                      children: [
-                        //? back
-                        Transform(
-                          alignment: Alignment.center,
-                          transform: Matrix4.identity()
-                            ..translate(
-                              Vector3(0, 0, -widthAndHeight),
-                            ),
-                          child: Container(
-                            height: widthAndHeight,
-                            width: widthAndHeight,
-                            color: Colors.purple,
+              animation: Listenable.merge([
+                _xController,
+                _yController,
+                _zController,
+              ]),
+              builder: (context, child) {
+                return Transform(
+                  alignment: Alignment.center,
+                  transform: Matrix4.identity()
+                    ..rotateX(_animation.evaluate(_xController))
+                    ..rotateY(_animation.evaluate(_yController))
+                    ..rotateZ(_animation.evaluate(_zController)),
+                  child: Stack(
+                    children: [
+                      //? back
+                      Transform(
+                        alignment: Alignment.center,
+                        transform: Matrix4.identity()
+                          ..translate(
+                            Vector3(0, 0, -widthAndHeight),
                           ),
-                        ),
-                        //? left side
-                        Transform(
-                          alignment: Alignment.centerLeft,
-                          transform: Matrix4.identity()..rotateY(pi / 2),
-                          child: Container(
-                            height: widthAndHeight,
-                            width: widthAndHeight,
-                            color: Colors.yellow,
-                          ),
-                        ),
-                        //? right side
-                        Transform(
-                          alignment: Alignment.centerRight,
-                          transform: Matrix4.identity()..rotateY(-pi / 2),
-                          child: Container(
-                            height: widthAndHeight,
-                            width: widthAndHeight,
-                            color: Colors.blue,
-                          ),
-                        ),
-                        //? front
-                        Container(
+                        child: Container(
                           height: widthAndHeight,
                           width: widthAndHeight,
-                          color: Colors.green,
+                          color: Colors.purple,
                         ),
-                        //? top side
-                        Transform(
-                          alignment: Alignment.topCenter,
-                          transform: Matrix4.identity()..rotateX(-pi / 2),
-                          child: Container(
-                            height: widthAndHeight,
-                            width: widthAndHeight,
-                            color: Colors.orange,
-                          ),
+                      ),
+                      //? left side
+                      Transform(
+                        alignment: Alignment.centerLeft,
+                        transform: Matrix4.identity()..rotateY(pi / 2),
+                        child: Container(
+                          height: widthAndHeight,
+                          width: widthAndHeight,
+                          color: Colors.yellow,
                         ),
-                        //? bottom side
-                        Transform(
-                          alignment: Alignment.bottomCenter,
-                          transform: Matrix4.identity()..rotateX(pi / 2),
-                          child: Container(
-                            height: widthAndHeight,
-                            width: widthAndHeight,
-                            color: Colors.cyan,
-                          ),
+                      ),
+                      //? right side
+                      Transform(
+                        alignment: Alignment.centerRight,
+                        transform: Matrix4.identity()..rotateY(-pi / 2),
+                        child: Container(
+                          height: widthAndHeight,
+                          width: widthAndHeight,
+                          color: Colors.blue,
                         ),
-                      ],
-                    ),
-                  );
-                }),
+                      ),
+                      //? front
+                      Container(
+                        height: widthAndHeight,
+                        width: widthAndHeight,
+                        color: Colors.green,
+                      ),
+                      //? top side
+                      Transform(
+                        alignment: Alignment.topCenter,
+                        transform: Matrix4.identity()..rotateX(-pi / 2),
+                        child: Container(
+                          height: widthAndHeight,
+                          width: widthAndHeight,
+                          color: Colors.orange,
+                        ),
+                      ),
+                      //? bottom side
+                      Transform(
+                        alignment: Alignment.bottomCenter,
+                        transform: Matrix4.identity()..rotateX(pi / 2),
+                        child: Container(
+                          height: widthAndHeight,
+                          width: widthAndHeight,
+                          color: Colors.cyan,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),
