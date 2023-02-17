@@ -23,11 +23,31 @@ class DetailScreen extends StatelessWidget {
           ) {
             switch (flightDirection) {
               case HeroFlightDirection.push:
+                /* return Material(
+                  color: Colors.transparent,
+                  child: ScaleTransition(
+                    scale: animation.drive(
+                      Tween<double>(
+                        begin: 0.0,
+                        end: 1.0,
+                      ).chain(
+                        CurveTween(
+                          curve: Curves.fastOutSlowIn,
+                        ),
+                      ),
+                    ),
+                    child: toHeroContext.widget,
+                  ),
+                ); */
                 return Material(
-                    color: Colors.transparent, child: toHeroContext.widget);
+                  color: Colors.transparent,
+                  child: toHeroContext.widget,
+                );
               case HeroFlightDirection.pop:
                 return Material(
-                    color: Colors.transparent, child: fromHeroContext.widget);
+                  color: Colors.transparent,
+                  child: fromHeroContext.widget,
+                );
             }
           },
           child: Material(
